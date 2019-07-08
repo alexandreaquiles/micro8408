@@ -45,7 +45,7 @@ export class PagamentoPedidoComponent implements OnInit {
 
   confirmaPagamento() {
     this.pagamentoService.confirma(this.pagamento)
-      .subscribe(pagamento => this.router.navigateByUrl(`pedidos/${pagamento.pedido.id}/status`));
+      .subscribe(pagamento => this.router.navigateByUrl(`pedidos/${pagamento.pedidoId}/status`));
   }
 
   cancelaPagamento() {

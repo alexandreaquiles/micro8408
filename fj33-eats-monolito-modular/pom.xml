@@ -17,7 +17,6 @@
 	</properties>
 	<modules>
 		<module>eats-admin</module>
-		<module>eats-pagamento</module>
 		<module>eats-restaurante</module>
 		<module>eats-pedido</module>
 		<module>eats-distancia</module>
