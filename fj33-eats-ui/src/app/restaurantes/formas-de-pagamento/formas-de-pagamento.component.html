@@ -1,0 +1,15 @@
+<form class="form-inline" #formasDePagamentoForm="ngForm">
+  <select class="form-control mb-2 mr-sm-2" [(ngModel)]="formaDePagamentoParaAdicionar" name="formaDePagamentoParaAdicionar">
+    <option *ngFor="let forma of todasAsFormasDePagamento" [ngValue]="forma">{{ forma.nome }}</option>
+  </select>
+  <button class="btn btn-primary mb-2" (click)="adicionaFormaDePagamentoAoRestaurante()">Adicionar</button>
+</form>
+
+<ul class="list-inline">
+  <li class="list-inline-item border rounded p-2" *ngFor="let formaDePagamento of formasDePagamentoDoRestaurante">
+    <span>{{ formaDePagamento.nome }}</span>
+    <button class="close text-danger ml-2" (click)="remove(formaDePagamento)">
+        <span>&times;</span>
+    </button>
+  </li>
+</ul>

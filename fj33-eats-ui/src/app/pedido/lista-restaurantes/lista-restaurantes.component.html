@@ -1,0 +1,32 @@
+<section class="mb-2" *ngIf="tiposDeCozinha?.length">
+    <h3>Tipos de Cozinha</h3>
+    <ul class="list-inline">
+      <li class="list-inline-item border rounded p-2" *ngFor="let tipoDeCozinha of tiposDeCozinha"><a
+          [routerLink]="['/pedidos', cep, 'tipos-de-cozinha', tipoDeCozinha.id]">{{tipoDeCozinha.nome}}</a></li>
+    </ul>
+  </section>
+
+<section class="my-4" *ngIf="restaurantesComDetalhes?.length">
+  <h2>Restaurantes próximos a {{ cep }}</h2>
+  <div class="card-columns mt-4 mb-5">
+    <div class="card bg-light shadow" *ngFor="let restaurante of restaurantesComDetalhes">
+      <div class="card-body">
+        <h5 class="card-title">{{restaurante.nome}}</h5>
+        <h6 class="card-subtitle" *ngIf="restaurante.mediaAvaliacoes" class="card-subtitle mb-2">★ {{ restaurante.mediaAvaliacoes | number:'1.1-1' }}</h6>
+        <p class="card-text">
+          <span>{{restaurante.tipoDeCozinha?.nome}}</span>
+          <span *ngIf="restaurante.tempoDeEntregaMinimoEmMinutos"> • {{restaurante.tempoDeEntregaMinimoEmMinutos}} min</span>
+          <span *ngIf="restaurante.tempoDeEntregaMaximoEmMinutos"> - {{restaurante.tempoDeEntregaMaximoEmMinutos}} min</span>
+          <span *ngIf="restaurante.distancia"> • {{ restaurante.distancia | number:'1.1-1' }} km</span>
+        </p>
+        <p class="card-text">{{ restaurante.taxaDeEntregaEmReais | currency:'BRL' }}</p>
+        <a [routerLink]="['/pedidos', this.cep, 'restaurante', restaurante.id]"
+          class="btn btn-primary stretched-link">Escolher</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="my-4" *ngIf="tipoDeCozinhaId && !restaurantesComDetalhes?.length">
+  <p>Desculpe! Não há nenhum restaurante.</p>
+</section>

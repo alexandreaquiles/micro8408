@@ -1,0 +1,12 @@
+<h3 class="my-2">Categorias do cardápio</h3>
+
+<form class="form-inline" #categoriasDoCardapioForm="ngForm">
+  <input class="form-control mb-2 mr-sm-2" [(ngModel)]="categoria.nome" name="categoria">
+  <button class="btn btn-primary mb-2" (click)="adicionaCategoriaAoCardapio()">Adicionar</button>
+</form>
+
+<ul class="list-inline">
+  <li class="list-inline-item border rounded p-2"  *ngFor="let categoria of cardapio.categorias">
+    <a class="ml-1" [routerLink]="['/restaurantes',restaurante.id,'cardapio',cardapio.id,'categoria',categoria.id]">{{ categoria.nome }}</a>
+  </li>
+</ul>

@@ -1,0 +1,27 @@
+<div class="row">
+  <div class="col-sm-4 mb-5">
+    <app-resumo-pedido [pedido]="pedido"></app-resumo-pedido>
+  </div>
+  <div class="col-sm-8 mb-5">
+    <h2>Acompanhe o Pedido</h2>
+    <h1><span class="badge badge-info">{{ pedido.status | statusDoPedido }}</span></h1>
+
+    <div class="mt-5" *ngIf="pedido.status == 'ENTREGUE' && !avaliacao.id">
+      <h3>Avalie o pedido</h3>
+      <form class="mb-5" #avaliacaoForm="ngForm" (ngSubmit)="salvaAvaliacao()">
+        <div class="form-group">
+          <ngb-rating required max="5" [(ngModel)]="avaliacao.nota" name="nota"></ngb-rating>
+        </div>
+        <div class="form-group">
+          <textarea class="form-control" [(ngModel)]="avaliacao.comentario" id="comentario" name="comentario"></textarea>
+        </div>
+        <button class="btn btn-primary" type="submit" [disabled]="!avaliacaoForm.form.valid">Avaliar</button>
+      </form>
+    </div>
+
+    <div class="my-5" *ngIf="pedido.status == 'ENTREGUE' && avaliacao.id">
+      <p class="lead text-info">Avaliação devidamente registrada. Muito obrigado!</p>
+    </div>
+
+  </div>
+</div>

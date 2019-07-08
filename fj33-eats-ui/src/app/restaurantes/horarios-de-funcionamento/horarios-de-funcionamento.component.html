@@ -1,0 +1,56 @@
+<button class="btn btn-primary btn-sm my-1" (click)="adiciona(horarioDeFuncionamentoModal)">Adicionar</button>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Dia da semana</th>
+      <th>Horário de abertura</th>
+      <th>Horário de fechamento</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let horarioDeFuncionamento of horariosDeFuncionamento">
+        <td>{{horarioDeFuncionamento.diaDaSemana | diaDaSemana}}</td>
+        <td>{{horarioDeFuncionamento.horarioDeAbertura}}</td>
+        <td>{{horarioDeFuncionamento.horarioDeFechamento}}</td>
+        <td class="text-right">
+          <button class="btn btn-secondary btn-sm mr-1 mb-1 mb-lg-0"  (click)="edita(horarioDeFuncionamentoModal, horarioDeFuncionamento)">Editar</button>
+          <button class="btn btn-danger btn-sm" (click)="remove(horarioDeFuncionamento)">Remover</button>
+        </td>
+    </tr>
+  </tbody>
+</table>
+
+<ng-template #horarioDeFuncionamentoModal let-modal>
+
+  <div class="modal-body">
+
+    <form #horarioDeFuncionamentoForm="ngForm" (ngSubmit)="salva()">
+
+      <div class="form-group">
+        <label for="diaDaSemana">Dia da semana</label>
+        <select class="form-control" [(ngModel)]="horarioDeFuncionamento.diaDaSemana" required name="diaDaSemana" id="diaDaSemana">
+          <option *ngFor="let dia of diasDaSemana" [value]="dia.valor">{{dia.nome}}</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="horarioDeAbertura">Horário de abertura</label>
+        <input type="time" class="form-control" required name="horarioDeAbertura" id="horarioDeAbertura" [(ngModel)]="horarioDeFuncionamento.horarioDeAbertura">
+      </div>
+
+      <div class="form-group">
+          <label for="horarioDeFechamento">Horário de fechamento</label>
+          <input type="time" class="form-control" required name="horarioDeFechamento" id="horarioDeFechamento" [(ngModel)]="horarioDeFuncionamento.horarioDeFechamento">
+        </div>
+
+      <button type="submit" class="btn btn-primary mr-1" [disabled]="!horarioDeFuncionamentoForm.form.valid">Salvar</button>
+
+      <button type="button" class="btn btn-default" (click)="modal.dismiss()">Cancelar</button>
+
+    </form>
+
+  </div>
+
+</ng-template>

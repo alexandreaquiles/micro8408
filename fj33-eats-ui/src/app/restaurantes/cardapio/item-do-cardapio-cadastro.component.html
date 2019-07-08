@@ -1,0 +1,34 @@
+<h3><small>Cardápio do restaurante:</small> {{ restaurante.nome }}</h3>
+<h2><small>Categoria do cardápio: </small> {{ categoria.nome }}</h2>
+
+
+<form #itemDoCardapioForm="ngForm" (ngSubmit)="salva()">
+
+  <input type="hidden" name="id" [(ngModel)]="item.id">
+
+  <div class="form-group">
+    <label for="nome">Nome</label>
+    <input class="form-control" required name="nome" id="nome" [(ngModel)]="item.nome">
+  </div>
+
+  <div class="form-group">
+    <label for="descricao">Descrição</label>
+    <textarea class="form-control" required name="descricao" id="descricao" [(ngModel)]="item.descricao"></textarea>
+  </div>
+
+  <div class="form-group">
+    <label for="preco">Preço</label>
+    <input class="form-control" required name="preco" id="preco" [(ngModel)]="item.preco">
+  </div>
+
+  <div class="form-group">
+    <label for="precoPromocional">Preço Promocional</label>
+    <input class="form-control" name="precoPromocional" id="precoPromocional" [(ngModel)]="item.precoPromocional">
+  </div>
+
+  <button class="btn btn-primary" type="submit" [disabled]="!itemDoCardapioForm.form.valid">Salvar</button>
+
+  <a class="btn btn-default" [routerLink]="['/restaurantes',restaurante.id, 'cardapio', cardapio.id, 'categoria', categoria.id]">Voltar</a>
+
+</form>
+

@@ -1,0 +1,34 @@
+<h2>Tipos de Cozinha</h2>
+
+<button class="btn btn-primary mt-3 mb-1" (click)="adiciona(tipoDeCozinhaModal)">Adicionar</button>
+
+<table class="table table-striped mb-5">
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let tipoDeCozinha of tiposDeCozinha">
+      <td>{{tipoDeCozinha.nome}}</td>
+      <td class="text-right">
+        <button class="btn btn-secondary mr-1 mb-1 mb-lg-0" (click)="edita(tipoDeCozinhaModal, tipoDeCozinha)">Editar</button>
+        <button class="btn btn-danger" (click)="remove(tipoDeCozinha)">Remover</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<ng-template #tipoDeCozinhaModal let-modal>
+  <div class="modal-body">
+      <form #tipoDeCozinhaForm="ngForm" (ngSubmit)="salva()">
+          <div class="form-group">
+              <label for="nome">Nome</label>
+              <input class="form-control" placeholder="digite o nome do tipo de cozinha" [(ngModel)]="tipoDeCozinha.nome" required id="nome" name="nome">
+          </div>
+          <button type="submit" class="btn btn-primary mr-1" [disabled]="!tipoDeCozinhaForm.form.valid">Salvar</button>
+          <button type="button" class="btn btn-default" (click)="modal.dismiss()">Cancelar</button>
+        </form>
+  </div>
+</ng-template>

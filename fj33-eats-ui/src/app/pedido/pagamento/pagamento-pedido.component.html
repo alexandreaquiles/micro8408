@@ -1,0 +1,45 @@
+<div class="row">
+  <div class="col-sm-4 mb-5">
+    <app-resumo-pedido [pedido]="pedido"></app-resumo-pedido>
+  </div>
+  <div class="col-sm-8 mb-5">
+    <form *ngIf="pagamento.status !== 'CRIADO'" class="mb-5" #pagamentoForm="ngForm" (ngSubmit)="criaPagamento()">
+      <h3>Dados do pagamento</h3>
+      <div class="form-group">
+        <label for="formaDePagamento">Forma de pagamento</label>
+        <select class="form-control" required id="formaDePagamento" name="formaDePagamento" [(ngModel)]="pagamento.formaDePagamento">
+          <option *ngFor="let forma of formasDePagamento" [ngValue]="forma">{{ forma.nome }}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="nome">Nome no cartão</label>
+        <input class="form-control" required id="nome" name="nome" [(ngModel)]="pagamento.nome" placeholder="nome como impresso no cartão">
+      </div>
+      <div class="form-group">
+        <label for="numero">Número do cartão</label>
+        <input class="form-control" required id="numero" name="numero" [(ngModel)]="pagamento.numero"
+          placeholder="0000 0000 0000 0000" [textMask]="{mask: numeroCartaoMask}">
+      </div>
+      <div class="form-group">
+        <label for="expiracao">Data de expiração</label>
+        <input class="form-control" type="month" required id="expiracao" name="expiracao" [(ngModel)]="pagamento.expiracao">
+      </div>
+      <div class="form-group">
+        <label for="codigo">Código de Segurança</label>
+        <input class="form-control" required id="codigo" name="codigo" [(ngModel)]="pagamento.codigo"
+          placeholder="000" [textMask]="{mask: codigoCartaoMask}">
+      </div>
+      <button *ngIf="!pagamento.status" class="btn btn-primary" type="submit" [disabled]="!pagamentoForm.form.valid">Criar pagamento</button>
+    </form>
+    <div *ngIf="pagamento.status === 'CRIADO'">
+      <dl>
+        <dt>Cartão</dt>
+        <dd>{{ pagamento.numero.substring(0, 5) }} XXXX XXXX XXXX</dd>
+        <dt>Valor</dt>
+        <dd>{{ pedido.total | currency:'BRL' }}</dd>
+      </dl>
+      <button class="btn btn-success mr-2" (click)="confirmaPagamento()">Confirmar pagamento</button>
+      <button class="btn btn-danger" (click)="cancelaPagamento()">Cancelar pagamento</button>
+    </div>
+</div>
+</div>

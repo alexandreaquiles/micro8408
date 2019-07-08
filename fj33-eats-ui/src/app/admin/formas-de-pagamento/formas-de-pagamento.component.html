@@ -1,0 +1,42 @@
+<h2>Formas de Pagamento</h2>
+
+<button class="btn btn-primary mt-3 mb-1" (click)="adiciona(formaDePagamentoModal)">Adicionar</button>
+
+<table class="table table-striped mb-5">
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Tipo</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let formaDePagamento of formasDePagamento">
+      <td>{{formaDePagamento.nome}}</td>
+      <td>{{formaDePagamento.tipo | tipoDaFormaDePagamento}}</td>
+      <td class="text-right">
+        <button class="btn btn-secondary mr-1 mb-1 mb-lg-0" (click)="edita(formaDePagamentoModal, formaDePagamento)">Editar</button>
+        <button class="btn btn-danger" (click)="remove(formaDePagamento)">Remover</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<ng-template #formaDePagamentoModal let-modal>
+  <div class="modal-body">
+    <form #formaDePagamentoForm="ngForm" (ngSubmit)="salva()">
+      <div class="form-group">
+        <label for="nome">Nome</label>
+        <input class="form-control" placeholder="digite o nome da forma de pagamento" [(ngModel)]="formaDePagamento.nome" required id="nome" name="nome">
+     </div>
+     <div class="form-group">
+        <label for="tipo">Tipo</label>
+        <select class="form-control" [(ngModel)]="formaDePagamento.tipo" required id="tipo" name="tipo">
+          <option *ngFor="let tipo of tiposDeFormaDePagamento" [value]="tipo">{{tipo | tipoDaFormaDePagamento }}</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary mr-1" [disabled]="!formaDePagamentoForm.form.valid">Salvar</button>
+      <button type="button" class="btn btn-default" (click)="modal.dismiss()">Cancelar</button>
+      </form>
+  </div>
+</ng-template>

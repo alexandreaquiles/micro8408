@@ -1,0 +1,111 @@
+<p class="alert alert-danger" *ngIf="mensagem">
+  {{ mensagem }}
+</p>
+
+<form *ngIf="registrandoUsuario" class="mb-5" #registroUsuarioForm="ngForm" (ngSubmit)="registraUsuario()">
+  <div class="form-group">
+    <label for="username">Usuário:</label>
+    <input class="form-control" placeholder="registre um usuário" [(ngModel)]="userInfo.username" required id="username" name="username">
+  </div>
+  <div class="form-group">
+    <label for="password">Senha:</label>
+    <input class="form-control" placeholder="registre uma senha" [(ngModel)]="userInfo.password" type="password" required id="password" name="password">
+  </div>
+  <div class="form-group">
+    <label for="passwordConfirmation">Confirmação da Senha:</label>
+    <input class="form-control" placeholder="confirme a senha" [(ngModel)]="userInfo.passwordConfirmation" type="password" required id="passwordConfirmation" name="passwordConfirmation" #passwordConfirmation="ngModel">
+    <p class="text-danger mt-2" *ngIf="passwordConfirmation.dirty && !validaSenhas()">A senha e a confirmação não conferem.</p>
+  </div>
+  <button type="submit" class="btn btn-primary mr-1" [disabled]="!registroUsuarioForm.form.valid || !validaSenhas()">Registrar usuário</button>
+</form>
+
+<form *ngIf="!registrandoUsuario"  class="mb-5" #restauranteForm="ngForm" (ngSubmit)="salvaRestaurante()">
+
+  <div class="form-group">
+    <label for="nome">Nome</label>
+    <input class="form-control" placeholder="digite o nome do restaurante" [(ngModel)]="restaurante.nome" type="text" required id="nome" name="nome">
+  </div>
+
+  <div class="form-group">
+    <label for="nome">CNPJ</label>
+    <input class="form-control" placeholder="00.000.000/0000-00" [(ngModel)]="restaurante.cnpj" required id="cnpj" name="cnpj" [textMask]="{mask: cnpjMask}">
+  </div>
+
+  <div class="form-group">
+    <label for="tipoDeCozinha">Tipo de cozinha</label>
+    <select class="form-control" [(ngModel)]="restaurante.tipoDeCozinha.id" required id="tipoDeCozinha"
+      name="tipoDeCozinha">
+      <option *ngFor="let tipo of tiposDeCozinha" [value]="tipo.id">{{tipo.nome}}</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="descricao">Descrição:</label>
+    <textarea class="form-control" [(ngModel)]="restaurante.descricao" id="descricao"
+      name="descricao"></textarea>
+  </div>
+
+  <div class="form-group">
+    <label for="cep">CEP:</label>
+    <input class="form-control" required [(ngModel)]="restaurante.cep" id="cep" name="cep" [textMask]="{mask: cepMask}">
+  </div>
+
+  <div class="form-group">
+    <label for="endereco">Endereço:</label>
+    <textarea required class="form-control" [(ngModel)]="restaurante.endereco" id="endereco"
+      name="endereco"></textarea>
+  </div>
+
+  <div class="form-group">
+    <label for="taxaDeEntregaEmReais">Taxa de entrega (em R$)</label>
+    <input class="form-control" [(ngModel)]="restaurante.taxaDeEntregaEmReais" type="text" id="taxaDeEntregaEmReais" name="taxaDeEntregaEmReais">
+  </div>
+
+  <div class="form-group">
+    <label for="tempoDeEntregaMinimoEmMinutos">Tempo de entrega mínimo (em minutos):</label>
+    <input class="form-control" [(ngModel)]="restaurante.tempoDeEntregaMinimoEmMinutos" type="number" min="10" max="180" id="tempoDeEntregaMinimoEmMinutos" name="tempoDeEntregaMinimoEmMinutos" placeholder="entre 10 e 180">
+  </div>
+
+  <div class="form-group">
+    <label for="tempoDeEntregaMaximoEmMinutos">Tempo de entrega máximo (em minutos):</label>
+    <input class="form-control" [(ngModel)]="restaurante.tempoDeEntregaMaximoEmMinutos" type="number" min="10" max="180" id="tempoDeEntregaMaximoEmMinutos" name="tempoDeEntregaMaximoEmMinutos" placeholder="entre 10 e 180">
+  </div>
+
+  <button class="btn btn-primary btn-lg mb-3" type="submit" [disabled]="!restauranteForm.form.valid">{{ restaurante.id ? 'Atualizar' : 'Inserir' }}</button>
+
+</form>
+
+<div class="mb-5" *ngIf="restaurante.id">
+
+  <ngb-accordion>
+
+    <ngb-panel>
+      <ng-template ngbPanelTitle>
+        <h2>Formas de Pagamento</h2>
+      </ng-template>
+      <ng-template ngbPanelContent>
+        <app-formas-de-pagamento [restaurante]="restaurante"></app-formas-de-pagamento>
+      </ng-template>
+    </ngb-panel>
+
+    <ngb-panel>
+      <ng-template ngbPanelTitle>
+        <h2>Cardápio</h2>
+      </ng-template>
+      <ng-template ngbPanelContent>
+        <app-cardapio-listagem [restaurante]="restaurante"></app-cardapio-listagem>
+      </ng-template>
+    </ngb-panel>
+
+    <ngb-panel>
+      <ng-template ngbPanelTitle>
+        <h2>Horários de Funcionamento</h2>
+      </ng-template>
+      <ng-template ngbPanelContent>
+        <app-horarios-de-funcionamento [restaurante]="restaurante"></app-horarios-de-funcionamento>
+      </ng-template>
+    </ngb-panel>
+
+  </ngb-accordion>
+
+</div>

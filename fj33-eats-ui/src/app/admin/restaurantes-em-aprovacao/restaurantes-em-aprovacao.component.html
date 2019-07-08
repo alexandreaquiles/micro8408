@@ -1,0 +1,21 @@
+<h2>Restaurantes em aprovação</h2>
+
+<table class="table" *ngIf="restaurantesEmAprovacao?.length">
+  <tbody>
+    <tr *ngFor="let restaurante of restaurantesEmAprovacao">
+      <td>{{ restaurante.nome }} <span class="badge badge-success">{{ restaurante.aprovado ? 'Aprovado' : '' }}</span>
+      </td>
+      <td class="text-right">
+        <button class="btn btn-primary" [disabled]="restaurante.aprovado" (click)="aprova(restaurante)">Aprovar</button>
+        <button class="btn btn-default" (click)="detalha(restaurante)">Detalhar</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<div *ngIf="!restaurantesEmAprovacao?.length" >
+  <p>Não há restaurantes a serem aprovados</p>
+</div>
+
+<div class="shadow border bg-light mb-5 p-3" *ngIf="restauranteEmDetalhe">
+  <app-detalhes-do-restaurante [restaurante]="restauranteEmDetalhe"></app-detalhes-do-restaurante>
+</div>

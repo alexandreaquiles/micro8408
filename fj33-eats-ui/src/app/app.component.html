@@ -1,0 +1,46 @@
+<header>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a routerLink="/" class="navbar-brand">{{title}}</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" (click)="isNavbarCollapsed = !isNavbarCollapsed">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div [ngbCollapse]="isNavbarCollapsed" class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li *ngIf="!user" class="nav-item"><a class="nav-link" routerLink="/login">Login</a></li>
+        <li *ngIf="user?.roles?.includes('ADMIN')" class="nav-item dropdown" ngbDropdown>
+          <a class="nav-link dropdown-toggle" ngbDropdownToggle>Admin</a>
+          <div class="dropdown-menu" ngbDropdownMenu>
+            <a class="dropdown-item" ngbDropdownItem routerLink="/admin/tipos-de-cozinha">Tipos de Cozinha</a>
+            <a class="dropdown-item" ngbDropdownItem routerLink="/admin/formas-de-pagamento">Formas de Pagamento</a>
+            <a class="dropdown-item" ngbDropdownItem routerLink="/admin/restaurantes-em-aprovacao">Restaurantes em
+              aprovação</a>
+          </div>
+        </li>
+        <li *ngIf="user?.roles?.includes('PARCEIRO') && user?.targetId" class="nav-item dropdown" ngbDropdown>
+          <a class="nav-link dropdown-toggle" ngbDropdownToggle>Meu Restaurante</a>
+          <div class="dropdown-menu" ngbDropdownMenu>
+            <a class="dropdown-item" ngbDropdownItem [routerLink]="['/restaurantes', user.targetId]">Cadastro</a>
+            <a class="dropdown-item" ngbDropdownItem [routerLink]="['/restaurantes', user.targetId, 'pedidos', 'pendentes']">Pedidos pendentes</a>
+          </div>
+        </li>
+        <li *ngIf="user" class="nav-item"><a class="nav-link" (click)="logout()">Logout</a></li>
+      </ul>
+    </div>
+  </nav>
+</header>
+
+<main class="my-5">
+  <div class="container">
+    <router-outlet></router-outlet>
+  </div>
+</main>
+
+<footer class="bg-light border-top fixed-bottom pt-3">
+  <div class="container">
+    <p class="text-muted">
+      <span>Copyright © 2019 - Caelum Eats - Todos os direitos reservados</span>
+      <span *ngIf="!user" class="ml-3"><a routerLink="/restaurantes">Cadastre seu Restaurante</a></span>
+    </p>
+  </div>
+</footer>

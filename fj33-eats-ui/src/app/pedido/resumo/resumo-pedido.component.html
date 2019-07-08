@@ -1,0 +1,12 @@
+<section *ngIf="pedido">
+  <h3>Resumo do pedido</h3>
+  <div *ngFor="let itemPedido of pedido.itens">
+    <hr>
+    <p>{{ itemPedido.quantidade }}x {{ itemPedido.itemDoCardapio.nome }}
+      <span>{{ itemPedido.quantidade * itemPedido.itemDoCardapio.preco | currency:'BRL' }}</span><br>
+      <span class="text-muted"><small>{{ itemPedido.observacao }}</small></span></p>
+  </div>
+  <hr>
+  <p>Taxa de entrega: {{ pedido.restaurante?.taxaDeEntregaEmReais ? (pedido.restaurante?.taxaDeEntregaEmReais | currency:'BRL') : 'Grátis' }}</p>
+  <p class="font-weight-bold">Total: {{ pedido.total | currency:'BRL' }}</p>
+</section>

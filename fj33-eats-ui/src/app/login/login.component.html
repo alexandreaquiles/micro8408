@@ -1,0 +1,11 @@
+<form #loginForm="ngForm" (ngSubmit)="efetuaLogin()">
+  <div class="form-group">
+    <label for="username">Usuário:</label>
+    <input class="form-control" [(ngModel)]="loginInfo.username" required id="username" name="username">
+  </div>
+  <div class="form-group">
+      <label for="password">Senha:</label>
+      <input class="form-control" [(ngModel)]="loginInfo.password" type="password" required id="password" name="password">
+    </div>
+    <button type="submit" class="btn btn-primary mr-1" [disabled]="!loginForm.form.valid">Logar</button>
+</form>
