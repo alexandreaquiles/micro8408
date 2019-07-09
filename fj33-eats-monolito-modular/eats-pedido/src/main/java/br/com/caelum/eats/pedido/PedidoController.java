@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.caelum.eats.exception.ResourceNotFoundException;
+import br.com.caelum.eats.pedido.Pedido.Status;
 import lombok.AllArgsConstructor;
 
 @RestController
@@ -59,4 +60,31 @@ class PedidoController {
 				.map(pedido -> new PedidoDto(pedido)).collect(Collectors.toList());
 	}
 
+	
+	@PutMapping("/pedidos/{id}/pago")
+	public void pago(@PathVariable Long id) {
+		Pedido pedido = repo.porIdComItens(id);
+		pedido.setStatus(Status.PAGO);
+		repo.atualizaStatus(Status.PAGO, pedido);
+		
+	}
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
