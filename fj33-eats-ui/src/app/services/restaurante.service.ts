@@ -10,7 +10,7 @@ import { environment } from 'src/environments/environment';
 export class RestauranteService {
 
   private API = environment.baseUrl;
-  private DISTANCIA_API = environment.distanciaUrl;
+  private DISTANCIA_API = environment.baseUrl + '/distancia';
 
   constructor(private http: HttpClient) {
   }

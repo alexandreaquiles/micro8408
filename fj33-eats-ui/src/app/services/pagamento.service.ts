@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
 })
 export class PagamentoService {
 
-  private API = environment.pagamentoUrl + '/pagamentos';
+  private API = environment.baseUrl + '/pagamentos';
 
   constructor(private http: HttpClient) {
   }

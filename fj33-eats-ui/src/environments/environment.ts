@@ -4,9 +4,7 @@
 
 export const environment = {
   production: false,
-  baseUrl: '//localhost:8080',
-  pagamentoUrl: '//localhost:8081',
-  distanciaUrl: '//localhost:8082'
+  baseUrl: '//localhost:9999'
 };
 
 /*
