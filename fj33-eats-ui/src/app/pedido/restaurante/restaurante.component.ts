@@ -54,14 +54,11 @@ export class RestauranteComponent implements OnInit {
     this.cep = this.route.snapshot.params.cep;
     const restauranteId = this.route.snapshot.params.restauranteId;
 
-    this.restaurantesService.porId(restauranteId)
+    this.restaurantesService.porCepEIdComDistancia(this.cep, restauranteId)
       .subscribe(restaurante => {
         this.restaurante = restaurante;
         this.pedido.restaurante = restaurante;
-        this.restaurantesService.distanciaPorCepEId(this.cep, restauranteId)
-          .subscribe(restauranteComDistancia => {
-            this.restaurante.distancia = restauranteComDistancia.distancia;
-        });
+        
         this.avaliacoesService.porIdDoRestaurante(restauranteId)
           .subscribe(avaliacoes => {
             this.avaliacoes = avaliacoes;

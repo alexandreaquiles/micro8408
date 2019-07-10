@@ -35,6 +35,10 @@ export class RestauranteService {
     return this.http.get(`${this.DISTANCIA_API}/restaurantes/${cep}/restaurante/${restauranteId}`);
   }
 
+  porCepEIdComDistancia(cep: string, restauranteId: string): Observable<any> {
+    return this.http.get(`${this.API}/restaurantes-com-distancia/${cep}/restaurante/${restauranteId}`);
+  }
+
   formasDePagamento(restaurante): Observable<any>  {
     return this.http.get(`${this.API}/restaurantes/${restaurante.id}/formas-de-pagamento`);
   }
