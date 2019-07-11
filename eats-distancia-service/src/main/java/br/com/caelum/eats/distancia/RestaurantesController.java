@@ -36,11 +36,13 @@ public class RestaurantesController {
 	
 	@PutMapping("/restaurantes/{id}")
 	public  RestauranteMongo atualiza(@PathVariable Long id, @RequestBody RestauranteMongo restaurante) {
-		log.info("Atualizando restaurante: " + restaurante);
-		if (!repo.existsById(id)) {
-			throw new ResourceNotFoundException();
-		}
-		return repo.save(restaurante);
+		throw new RuntimeException("Simulando um erro ao atualizar");
+		
+//		log.info("Atualizando restaurante: " + restaurante);
+//		if (!repo.existsById(id)) {
+//			throw new ResourceNotFoundException();
+//		}
+//		return repo.save(restaurante);
 	}
 	
 }
