@@ -16,3 +16,13 @@ services:
     restart: on-failure
     ports:
       - "27018:27017"
+  rabbitmq:
+    image: "rabbitmq:3-management"
+    restart: on-failure
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: eats
+      RABBITMQ_DEFAULT_PASS: caelum123
+
