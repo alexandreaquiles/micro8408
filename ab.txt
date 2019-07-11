@@ -1,0 +1,20 @@
+ab -n 100 -c 10 http://localhost:9999/restaurantes-com-distancia/71503510/restaurante/1
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.3      0       2
+Processing: 10074 14699 2867.2  14572   20018
+Waiting:    10070 14696 2867.0  14568   20013
+Total:      10074 14699 2867.1  14572   20018
+
+Percentage of the requests served within a certain time (ms)
+  50%  14572
+  66%  16414
+  75%  17336
+  80%  17707
+  90%  18638
+  95%  19394
+  98%  19786
+  99%  20018
+ 100%  20018 (longest request)
+
