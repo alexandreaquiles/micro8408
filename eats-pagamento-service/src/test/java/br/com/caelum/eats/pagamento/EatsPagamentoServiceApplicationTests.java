@@ -1,4 +1,4 @@
-package br.com.caelum.eatspagamentoservice;
+package br.com.caelum.eats.pagamento;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

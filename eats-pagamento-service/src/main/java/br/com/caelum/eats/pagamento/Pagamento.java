@@ -22,7 +22,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-class Pagamento {
+public class Pagamento {
 
 	public static enum Status {
 		CRIADO,
